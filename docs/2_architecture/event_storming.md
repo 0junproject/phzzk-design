@@ -150,7 +150,7 @@ flowchart LR
 | # | 이슈 | 확정 시점 |
 |---|---|---|
 | 1 | 알림 대상(온라인 유저) 판별 방식 — 커넥션 레지스트리 필요 여부 | `system_architecture.md` |
-| 2 | MQ 종류 선택 (Kafka vs RabbitMQ) | `tech_stack.md` (ADR) |
+| 2 | MQ 종류 선택 (Kafka vs RabbitMQ) | ✅ 해소 — Kafka 채택 ([ADR-0004](adr/0004-message-broker-selection.md)) |
 | 3 | 채팅 도배 방지 초과 시 거부/지연 등 구체적 처리 방식 | `api_specification.md` |
 | 4 | DB 부하 시 채팅 메시지 영속화 포기 기준선(Fallback 트리거 조건) | `system_architecture.md` |
 | 5 | 스트림 키 검증 책임 주체 (Streaming 자체 검증 vs Auth 위임) | `system_architecture.md` |
