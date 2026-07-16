@@ -39,7 +39,7 @@
 2. **트래픽 병목 방지 (Caching):** 메인 화면의 라이브 목록, 채팅의 세션 정보 등 읽기 빈도가 높은 데이터는 RDBMS 조회를 피하고 **Redis**를 적극 활용합니다.
 3. **비동기 팬아웃 (Asynchronous Fan-out):** 인플루언서 방송 시작 등 대규모 이벤트 처리 시, 서버가 뻗지 않도록 Message Queue(Kafka/RabbitMQ)를 사용하여 작업을 Chunking하고 워커(Worker)로 분산 처리합니다.
 4. **장애 격리 (Fault Tolerance):** 월드컵 결승전 등 채팅 트래픽 폭주 상황을 대비하여 도배 방지(Rate Limiting)를 구현하고, DB 부하 발생 시 DB 저장을 포기하더라도 실시간 브로드캐스팅(웹소켓 통신)은 유지하는 Fallback 전략을 수립합니다.
-5. **인프라 최소화:** 로컬 환경에서의 빠른 개발을 위해, 과도한 Spring Cloud 생태계(Eureka, Config) 도입은 보류하고 Docker Compose와 환경변수를 활용합니다.
+5. **인프라 구성:** API Gateway(Spring Cloud Gateway) + Eureka(Service Discovery)는 기본으로 구축합니다 (Chat/Streaming 등 수평 확장 서비스의 동적 인스턴스 탐색과 단일 진입점 라우팅/JWT 1차 검증이 트래픽 처리 데모에 직결되기 때문). 다만 **Spring Cloud Config 서버 도입은 보류**합니다 — 로컬 단일 환경에서는 설정값이 적어 중앙관리 이점이 작고, 부팅 시점 SPOF와 서비스 기동 순서 의존성만 늘어나므로 Docker Compose 환경변수(.env)와 서비스별 `application.yml` profile로 대체합니다.
 
 ## 5. 에이전트 행동 지침 (Agent Behavior Protocol)
 * **묻고 시작하기:** 설계를 시작하거나 코드를 생성하기 전에, `/docs` 디렉토리 내의 산출물(액터 정의, MVP 스코프 등)을 먼저 읽고 컨텍스트를 파악하라.
